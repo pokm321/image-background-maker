@@ -1,6 +1,6 @@
-from PIL import ImageFilter
+from PIL import ImageFilter, ImageEnhance
 
-def process_image(original_image, ratio, blur):
+def process_image(original_image, ratio, blur, contrast):
     if original_image.mode != "RGB":
         original_image = original_image.convert("RGB")
     
@@ -15,8 +15,10 @@ def process_image(original_image, ratio, blur):
         new_width = width
         new_height = int(width / ratio)
 
-    stretched_image = original_image.resize((new_width, new_height))
-    result_image = stretched_image.filter(ImageFilter.GaussianBlur(radius=new_width*blur))
+    result_image = original_image.resize((new_width, new_height))\
+                .filter(ImageFilter.GaussianBlur(radius=new_width*blur))
+    
+    result_image = ImageEnhance.Contrast(result_image).enhance(contrast)
 
     left_coor = int((new_width - width) / 2)
     top_coor = int((new_height - height) / 2)
