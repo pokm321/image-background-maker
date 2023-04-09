@@ -9,7 +9,7 @@ processed_directory = "C:/Processed/Path/"  # Directory to save converted images
 ratio = 16 / 9                              # Aspect ratio of converted images
 blur = 0.1                                  # Blur level of the background
 contrast = 0.6                              # Contrast level of the background
-skip_redundant = True                       # Whether to skip processing images that's already been converted
+skip_redundant = True                       # Whether to skip processing images that have already been converted
 
 os.makedirs(processed_directory, exist_ok=True)
 
