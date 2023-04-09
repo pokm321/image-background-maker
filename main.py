@@ -4,16 +4,20 @@ from PIL import Image
 import shutil
 import os
 
-original_directory = "C:/Users/pokm9/Desktop/Pics/test/"
-processed_directory = "C:/Users/pokm9/Desktop/Pics/test/processed/"
+original_directory = "C:/Original/Path/"
+processed_directory = "C:/Processed/Path/"
 ratio = 16 / 9
 blur = 0.1
 contrast = 0.6
+skip_redundant = True
 
 os.makedirs(processed_directory, exist_ok=True)
 
 for file in os.listdir(original_directory):
   if os.path.isdir(original_directory + file) or file.endswith(".bat"):
+    continue
+
+  if skip_redundant and os.path.exists(processed_directory + file):
     continue
 
   try:

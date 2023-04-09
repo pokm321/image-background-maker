@@ -1,4 +1,4 @@
-from PIL import Image, ImageSequence
+from PIL import ImageSequence
 from processors.image_processor import process_image
 
 def process_gif(frames, ratio, blur, contrast):
