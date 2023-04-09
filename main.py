@@ -1,30 +1,18 @@
-from PIL import Image, ImageFilter
+from processors.processor import process_image
+import os
 
-# Open the original image
-image_name = "image.jpeg"
+original_directory = "C:/Users/pokm9/Desktop/Pics/test/"
+processed_directory = "C:/Users/pokm9/Desktop/Pics/test/processed/"
 ratio = 16 / 9
 blur = 0.15
 
-original_image = Image.open(f"C:/Users/pokm9/Desktop/Pics/{image_name}")
+for file in os.listdir(original_directory):
+  if os.path.isdir(original_directory + file):
+    continue
 
-width, height = original_image.size
+  try:
+    process_image(original_directory + file, processed_directory + file, ratio, blur)
+  except:
+    print("Error processing :", original_directory + file)
 
-if width / height < ratio :
-    # Stretch horizontally
-    new_width = int(height * ratio)
-    new_height = height
-else:
-    # Stretch vertically
-    new_width = width
-    new_height = int(width / ratio)
-
-stretched_image = original_image.resize((new_width, new_height))
-blurred_image = stretched_image.filter(ImageFilter.GaussianBlur(radius=new_width*blur))
-
-left_coor = int((new_width - width) / 2)
-top_coor = int((new_height - height) / 2)
-
-blurred_image.paste(original_image, (left_coor, top_coor))
-
-# Save resulting image
-blurred_image.save(f"C:/Users/pokm9/Desktop/Pics/processed/{image_name}")
+print("Done processing.")
