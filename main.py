@@ -4,12 +4,14 @@ from PIL import Image
 import shutil
 import os
 
-original_directory = "C:/Original/Path/"    # Directory containing images to convert
-processed_directory = "C:/Processed/Path/"  # Directory to save converted images
+original_directory = "C:/original/directory/"    # Directory containing images to convert
+processed_directory = "C:/processed/directory/"  # Directory to save converted images
 ratio = 16 / 9                              # Aspect ratio of converted images
-blur = 0.1                                  # Blur level of the background
-contrast = 0.6                              # Contrast level of the background
 skip_redundant = True                       # Whether to skip processing images that have already been converted
+
+blur = 0.15                                 # Blur level of the background
+contrast = 0.6                              # Contrast level of the background
+
 
 os.makedirs(processed_directory, exist_ok=True)
 

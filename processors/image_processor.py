@@ -1,4 +1,5 @@
 from PIL import ImageFilter, ImageEnhance
+from statistics import mean
 
 def process_image(original_image, ratio, blur, contrast):
     if original_image.mode != "RGB":
@@ -19,6 +20,17 @@ def process_image(original_image, ratio, blur, contrast):
                 .filter(ImageFilter.GaussianBlur(radius=new_width*blur))
     
     result_image = ImageEnhance.Contrast(result_image).enhance(contrast)
+
+    # auto-adjust the saturation of the background
+    saturation_original = mean(list(original_image.convert("HSV").getdata(1)))
+    saturation = (1 + (1 - saturation_original / 100) / 2)
+    result_image = ImageEnhance.Color(result_image).enhance(saturation)
+
+    # auto-adjust the brightness of the background
+    brightness_original = mean(list(original_image.convert("L").getdata()))
+    if brightness_original < 100:
+        brightness = (1 + (1 - brightness_original / 100) / 2)
+        result_image = ImageEnhance.Brightness(result_image).enhance(brightness)
 
     left_coor = int((new_width - width) / 2)
     top_coor = int((new_height - height) / 2)
