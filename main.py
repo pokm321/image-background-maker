@@ -1,8 +1,7 @@
 from processors.image_processor import process_image
 from processors.gif_processor import process_gif
 from PIL import Image
-import shutil
-import os
+import shutil, os, sys
 
 base_dir = "C:/Base/Dir/"                   # Directory containing images to convert
 
@@ -12,6 +11,12 @@ skip_redundant = True                       # Whether to skip processing images 
 blur = 0.15                                 # Blur level of the background
 contrast = 0.6                              # Contrast level of the background
 
+
+if not os.path.isdir(base_dir):
+  print("Invalid Directory.")
+  sys.exit(0)
+elif not base_dir.endswith("/"):
+  base_dir += "/"
 
 processed_dir = base_dir + "Processed/"
 temp_dir = base_dir + "temp/"
