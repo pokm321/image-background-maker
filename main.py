@@ -5,7 +5,7 @@ import shutil
 import os
 
 base_dir = "C:/Base/Dir/"                   # Directory containing images to convert
-processed = "Processed/"                    # Directory (inside the base_dir) to save converted images
+
 ratio = 16 / 9                              # Aspect ratio of converted images
 skip_redundant = True                       # Whether to skip processing images that have already been converted
 
@@ -13,7 +13,7 @@ blur = 0.15                                 # Blur level of the background
 contrast = 0.6                              # Contrast level of the background
 
 
-processed_dir = base_dir + processed
+processed_dir = base_dir + "Processed/"
 temp_dir = base_dir + "temp/"
 os.makedirs(processed_dir, exist_ok=True)
 os.makedirs(temp_dir, exist_ok=True)
