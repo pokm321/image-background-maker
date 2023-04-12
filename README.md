@@ -16,5 +16,5 @@ Automatically adds a background of a desired aspect ratio.
   
 </table>
 
-### Edit the directory in the code. (+other options)
+### Edit the base directory (base_dir) in the code. (+other options if wanted)
 
